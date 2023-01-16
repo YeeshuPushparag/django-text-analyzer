@@ -1,0 +1,58 @@
+{% extends 'basic.html' %}
+{% block title %}MySite{% endblock %}
+{% block body %}
+
+<div class="container my-3">
+
+  <form action='/analyzetext' method='get'> <comment>{% csrf_token %}</comment>
+
+
+
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Enter your text here and let Text Utils do the magic</label>
+    <textarea class="form-control" name='text' id="exampleFormControlTextarea1" rows="9"></textarea>
+  </div>
+
+<div class="custom-control custom-switch">
+  <input type="checkbox" name="removepunc" class="custom-control-input" id="customSwitch1">
+  <label class="custom-control-label" for="customSwitch1">Remove Punctuations</label>
+</div>
+
+  <div class="custom-control custom-switch">
+  <input type="checkbox" name="fullcaps" class="custom-control-input" id="customSwitch2">
+  <label class="custom-control-label" for="customSwitch2">UPPERCASE</label>
+</div>
+
+  <div class="custom-control custom-switch">
+  <input type="checkbox"  name="newline" class="custom-control-input" id="customSwitch3">
+  <label class="custom-control-label" for="customSwitch3">New Line Remover</label>
+</div>
+
+  <div class="custom-control custom-switch">
+  <input type="checkbox"  name="spaceremover" class="custom-control-input" id="customSwitch4">
+  <label class="custom-control-label" for="customSwitch4">Extra Spaces Remover</label>
+</div>
+
+   <div class="custom-control custom-switch">
+  <input type="checkbox"  name="charcount" class="custom-control-input" id="customSwitch5">
+  <label class="custom-control-label" for="customSwitch5">Character Count</label>
+</div>
+<input type="button" value="Clear Text" class="btn btn-dark mt-2" id="clear">
+<input type="button" value="Copy Text" class="btn btn-dark mt-2" id="copy">
+<button type="submit" class="btn btn-dark mt-2">Analyze Text</button>
+    </form>
+</div>
+<script>
+  let clear = document.getElementById("clear")
+  let copy = document.getElementById("copy")
+  let text = document.getElementById("exampleFormControlTextarea1")
+  clear.addEventListener("click",()=>{
+    text.value = ""
+  })
+  copy.addEventListener("click", ()=>{
+    text.select()
+    navigator.clipboard.writeText(text.value);
+  })
+</script>
+ {% endblock %}
+

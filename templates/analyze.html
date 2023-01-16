@@ -1,0 +1,32 @@
+{% extends 'basic.html' %}
+{% block title %}Analyze Text{% endblock %}
+{% block body %}
+<div class="container my-3">
+
+<h1>Your Analyzed Text - {{ purpose }}</h1>
+  <pre id="analyzedText">{{ analyzed_text }}</pre>
+  {% if count_text %}
+  <p>Word Count: {{count_text}}</p>
+ {% endif %}
+ <input type="button" value="Copy Text" class="btn btn-dark mt-2" id="copy">
+</div>
+<script>
+  let copy = document.getElementById("copy")
+  copy.addEventListener("click", ()=>{
+  let pre = document.getElementById("analyzedText")
+  let text = document.getElementById("analyzedText").textContent
+  const textArea = document.createElement('textarea');
+  textArea.textContent = text;
+  document.body.append(textArea);
+  textArea.style.position = 'absolute'
+  textArea.style.left = '-100%'
+  textArea.select();
+  pre.style.color = "blue"
+  setTimeout(() => {
+    pre.style.color = 'black'
+  }, 1000);
+  document.execCommand("copy");
+  })
+</script>
+ {% endblock %}
+
